@@ -17,9 +17,9 @@
 <script>
 import header from './components/header/header.vue'
 export default {
-componets: {
-		header
-	},
+  componets: {
+    header
+  },
   name: 'app'
 }
 </script>
