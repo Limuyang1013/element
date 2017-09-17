@@ -4,15 +4,18 @@
   		<v-header></v-header>
   	</div>
   	<div class="tab">
-  		<div class="tab-item">商品</div>
-  		<div class="tab-item">评论</div>
-  		<div class="tab-item">商家</div>
+  		<div class="tab-item">
+  			<router-link to="/goods">商品</router-link>
+  		</div>
+  		<div class="tab-item">
+  			<router-link to="/ratings">评论</router-link>
+  		</div>
+  		<div class="tab-item">
+  			<router-link to="/seller">商家</router-link>
+  		</div>
   	</div>
-  	<div class="content">
-  		content
-  	</div>
+  	 <router-view></router-view>
     <!--<img src="./assets/logo.png">-->
-    <router-view></router-view>
   </div>
 </template>
 
