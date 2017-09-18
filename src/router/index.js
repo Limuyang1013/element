@@ -5,25 +5,26 @@ Vue.use(Router)
 
 // 懒加载引用组件
 const goods = (resolve) => {
-  import('../components/goods/goods').then((module) => {
+  import('components/goods/goods').then((module) => {
     resolve(module)
   })
 }
 
 const ratings = (resolve) => {
-  import('../components/ratings/ratings').then((module) => {
+  import('components/ratings/ratings').then((module) => {
     resolve(module)
   })
 }
 
 const seller = (resolve) => {
-  import('../components/seller/seller').then((module) => {
+  import('components/seller/seller').then((module) => {
     resolve(module)
   })
 }
 
 export default new Router({
   mode: 'history',
+  linkActiveClass: 'active',
   routes: [
     {
       path: '/',
