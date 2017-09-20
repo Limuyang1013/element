@@ -51,7 +51,7 @@
   .header
     position: relative
     color: #fff
-    background: rgba(7,17,27,0.5)
+    background: rgba(7,17,27,0.1)
     .content-wrapper
       position: relative
       padding: 24px 12px 18px 24px
@@ -141,7 +141,7 @@
         vertical-align: top
         width: 22px
         height: 12px
-        margin-top: 7px
+        margin-top: 8px
         bg-image('bulletin')
         background-size 22px 12px
         background-repeat: no-repeat
