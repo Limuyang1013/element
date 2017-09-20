@@ -12,7 +12,7 @@
         <div class="description">
           {{seller.description}}/{{seller.deliveryTime}}分钟送达
         </div>
-        <div v-if="seller.supports" class="supports">
+        <div v-if="seller.supports" class="supports" @click="showDetail">
           <span class="icon" :class="classMap[seller.supports[0].type]"></span>
           <span class="text">{{seller.supports[0].description}}</span>
         </div>
@@ -22,13 +22,23 @@
         <i class="icon-keyboard_arrow_right"></i>
       </div>
     </div>
-    <div class="bulletin-wrapper">
+    <div class="bulletin-wrapper" @click="showDetail">
       <span class="bulletin-title"></span><span
       class="bulletin-text">{{seller.bulletin}}</span>
       <i class="icon-keyboard_arrow_right"></i>
     </div>
     <div class="background">
       <img :src="seller.avatar" width="100%" height="100%">
+    </div>
+    <div v-show="detailShow" class="detail">
+      <div class="detail-wrapper clearfix">
+        <div class="detail-main">
+
+        </div>
+      </div>
+      <div class="detail-close">
+        <i class="icon-close"></i>
+      </div>
     </div>
 	</div>
 </template>
@@ -38,6 +48,16 @@
 	  props: {
 	    seller: {
 	      type: Object
+      }
+    },
+    data() {
+	    return {
+        detailShow: false
+      }
+    },
+    methods: {
+      showDetail() {
+        this.detailShow = true
       }
     },
     created() {
@@ -50,6 +70,7 @@
   @import "../../common/stylus/mixin.styl"
   .header
     position: relative
+    overflow: hidden
     color: #fff
     background: rgba(7,17,27,0.1)
     .content-wrapper
@@ -164,4 +185,26 @@
       height: 100%
       z-index: -1
       filter: blur(10px)
+    .detail
+      position: fixed
+      z-index: 100
+      top: 0
+      left: 0
+      width: 100%
+      height: 100%
+      overflow: auto
+      background: rgba(7,17,27,0.8)
+      .detail-wrapper
+        min-height: 100%
+        .detail-main
+          margin-top: 64px
+          padding-bottom: 64px
+      .detail-close
+        position: relative
+        width: 32px
+        height: 32px
+        margin: -64px auto 0 auto
+        clear: both
+        font-size: 32px
+
 </style>
