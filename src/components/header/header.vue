@@ -33,7 +33,10 @@
     <div v-show="detailShow" class="detail">
       <div class="detail-wrapper clearfix">
         <div class="detail-main">
-
+          <h1 class="name">{{seller.name}}</h1>
+          <div class="star-wrapper">
+            <star :size="48" :score="seller.score"></star>
+          </div>
         </div>
       </div>
       <div class="detail-close">
@@ -44,26 +47,30 @@
 </template>
 
 <script type="text/ecmascript-6">
-	export default {
-	  props: {
-	    seller: {
-	      type: Object
-      }
-    },
-    data() {
-	    return {
-        detailShow: false
-      }
-    },
-    methods: {
-      showDetail() {
-        this.detailShow = true
-      }
-    },
-    created() {
-      this.classMap = ['decrease', 'discount', 'special', 'invoice', 'guarantee']
+import star from '../../components/star/star.vue'
+export default {
+  props: {
+    seller: {
+      type: Object
     }
+  },
+  data() {
+    return {
+      detailShow: false
+    }
+  },
+  methods: {
+    showDetail() {
+      this.detailShow = true
+    }
+  },
+  created() {
+    this.classMap = ['decrease', 'discount', 'special', 'invoice', 'guarantee']
+  },
+  components: {
+    star
   }
+}
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus">
@@ -100,7 +107,6 @@
             font-size: 16px
             line-height: 18px
             font-weight: bold
-
         .description
           margin-bottom: 10px
           line-height: 12px
@@ -196,9 +202,19 @@
       background: rgba(7,17,27,0.8)
       .detail-wrapper
         min-height: 100%
+        width: 100%
         .detail-main
           margin-top: 64px
           padding-bottom: 64px
+          .name
+            line-height: 16px
+            text-align: center
+            font-size: 16px
+            font-weight: 700
+          .star-wrapper
+            margin-top 18px
+            padding 2px 0
+            text-align center
       .detail-close
         position: relative
         width: 32px
