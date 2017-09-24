@@ -32,7 +32,7 @@ export default {
     }
   },
   created() {
-    this.$http.get('./api/seller').then((response) => {
+    this.$http.get('/api/seller').then((response) => {
       response = response.body
       if (response.errno === ERR_OK) {
         this.seller = response.data
@@ -65,6 +65,5 @@ export default {
        color: rgb(77,85,93)
        &.active
          color: rgb(240,20,20)
-
 
 </style>
