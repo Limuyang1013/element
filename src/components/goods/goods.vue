@@ -2,7 +2,7 @@
   <div class="goods">
     <div class="menu-wrapper" ref="menuWrapper">
       <ul>
-        <li v-for="item in goods" class="menu-item">
+        <li v-for="(item, index) in goods" class="menu-item" :class="{'current':currentIndex===index}">
           <span class="text border-1px">
             <span v-show="item.type>0" class="icon" :class="classMap[item.type]"></span>{{item.name}}
           </span>
@@ -62,17 +62,17 @@ export default {
         this.goods = response.data
         this.$nextTick(() => {
           this._initScroll()
-          this.calculateHeight()
+          this._calculateHeight()
         })
       }
     })
   },
   computed: {
     currentIndex() {
-      for (let i = 0; i < this.listHeight; i++) {
+      for (let i = 0; i < this.listHeight.length; i++) {
         let formerHeight = this.listHeight[i]
         let latterHeight = this.listHeight[i + 1]
-        if (!latterHeight || (this.scrollY > formerHeight && this.scrollY < latterHeight)) {
+        if (!latterHeight || (this.scrollY >= formerHeight && this.scrollY < latterHeight)) {
           return i
         }
       }
@@ -96,6 +96,7 @@ export default {
       for (let i = 0; i < foodList.length; i++) {
         let item = foodList[i]
         height += item.clientHeight
+        this.listHeight.push(height)
       }
     }
   }
@@ -121,6 +122,14 @@ export default {
         width: 56px
         padding: 0 12px
         line-height: 14px
+        &.current
+          position: relative
+          z-index: 10
+          margin-top: -1px
+          background: #fff
+          font-weight: 700
+          .text
+            border-none()
         .icon
           display: inline-block
           vertical-align: top
