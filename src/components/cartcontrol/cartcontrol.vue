@@ -32,7 +32,7 @@
           } else {
             this.food.count++
           }
-          this.$emit('increment', event.target)
+          this.$emit('add', event.target)
         },
         decreaseCart(event) {
           if (!event._constructed) {

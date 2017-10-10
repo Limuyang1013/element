@@ -21,7 +21,7 @@
         <div v-for="ball in balls">
           <transition name="drop" @before-enter="beforeEnter" @enter="enter" @after-enter="afterEnter">
             <div v-show="ball.show" class="ball">
-              <div class="inner"></div>
+              <div class="inner inner-hook"></div>
             </div>
           </transition>
         </div>
@@ -30,6 +30,7 @@
 </template>
 
 <script type="text/ecmascript-6">
+  import cartControl from '../cartcontrol/cartcontrol.vue'
   export default {
     props: {
       selectFoods: {
@@ -65,7 +66,9 @@
           {
             show: false
           }
-        ]
+        ],
+        dropBalls: [],
+        fold: true
       }
     },
     computed: {
@@ -113,6 +116,9 @@
           }
         }
       },
+      addFood(target) {
+        this.drop(target)
+      },
       beforeEnter(el) {
         let count = this.balls.length
         while (count--) {
@@ -147,6 +153,9 @@
           el.style.display = 'none'
         }
       }
+    },
+    components: {
+      cartControl
     }
   }
 </script>
