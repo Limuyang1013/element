@@ -27,12 +27,10 @@
           }
           if (!this.food.count) {
             // 设置count属性
-            Vue.set(this.food, 'count', 1)
-            this.food.count = 1
-          } else {
-            this.food.count++
+            Vue.set(this.food, 'count', 0)
           }
-          this.$emit('add', event.target)
+          this.food.count++
+          this.$root.eventHub.$emit('cart.add', event.target)
         },
         decreaseCart(event) {
           if (!event._constructed) {
