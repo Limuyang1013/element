@@ -1,6 +1,6 @@
 <template>
     <div class="shopcart">
-      <div class="content">
+      <div class="content" @click="toggleList">
         <div class="content-left">
           <div class="logo-wrapper">
             <div class="logo" :class="{'highlight':totalCount>0}">
@@ -24,6 +24,25 @@
               <div class="inner inner-hook"></div>
             </div>
           </transition>
+        </div>
+      </div>
+      <div class="shopcart-list" v-show="listShow">
+        <div class="list-header">
+          <h1 class="title">购物车</h1>
+          <span class="empty">清空</span>
+        </div>
+        <div class="list-content">
+          <ul>
+            <li class="food" v-for="food in selectFoods">
+              <span class="name">{{food.name}}</span>
+              <div class="price">
+                <span>¥{{food.price*food.count}}</span>
+              </div>
+              <div class="cartcontrol-wrapper">
+                <cartControl :food="food"></cartControl>
+              </div>
+            </li>
+          </ul>
         </div>
       </div>
     </div>
@@ -67,7 +86,8 @@
             show: false
           }
         ],
-        dropBalls: []
+        dropBalls: [],
+        fold: true
       }
     },
     computed: {
@@ -101,6 +121,14 @@
         } else {
           return 'enough'
         }
+      },
+      listShow() {
+        if (!this.totalCount) {
+          this.fold = true
+          return false
+        }
+        let show = !this.fold
+        return show
       }
     },
     created() {
@@ -117,6 +145,12 @@
             return
           }
         }
+      },
+      toggleList() {
+        if (!this.totalCount) {
+          return
+        }
+        this.fold = !this.fold
       },
       addFood(target) {
         this.drop(target)
@@ -264,4 +298,11 @@
             border-radius: 50%
             background rgb(0, 160, 220)
             transition: all 0.5s linear
+    .shopcart-list
+      position: absolute
+      top: 0
+      left: 0
+      z-index: -1
+      width: 100%
+
 </style>
