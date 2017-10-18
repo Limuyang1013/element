@@ -137,15 +137,15 @@
         }
         let show = !this.fold
         if (show) {
-          if (!this.scroll) {
-            this.$nextTick(() => {
+          this.$nextTick(() => {
+            if (!this.scroll) {
               this.scroll = new BScroll(this.$refs.listContent, {
                 click: true
               })
-            })
-          } else {
-            this.scroll.refresh()
-          }
+            } else {
+              this.scroll.refresh()
+            }
+          })
         }
         return show
       }
