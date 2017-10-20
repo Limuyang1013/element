@@ -17,13 +17,23 @@
           <div class="price">
             <span class="now">¥{{food.price}}</span><span class="old" v-show="food.oldPrice">¥{{food.oldPrice}}</span>
           </div>
+          <div class="cartcontrol-wrapper">
+            <cartcontrol :food="food"></cartcontrol>
+          </div>
+          <transition name="fade">
+            <div class="buy" v-show="!food.count || food.count===0" @click.stop.prevent="addFirst">加入购物车</div>
+          </transition>
         </div>
-        <div class="cartcontrol-wrapper">
-          <cartcontrol :food="food"></cartcontrol>
+        <split></split>
+        <div class="info" v-show="food.info">
+          <h1 class="title">商品信息</h1>
+          <p class="text">{{food.info}}</p>
         </div>
-        <transition name="fade">
-          <div class="buy" v-show="!food.count || food.count===0" @click.stop.prevent="addFirst">加入购物车</div>
-        </transition>
+        <split></split>
+        <div class="rating">
+          <h1 class="title">商品评价</h1>
+          <ratingselect :select-type="selectType" :only-content="onlyContent" :desc="desc" :ratings="food.ratings"></ratingselect>
+        </div>
       </div>
     </div>
   </transition>
@@ -33,6 +43,13 @@
   import BScroll from 'better-scroll'
   import Vue from 'vue'
   import cartcontrol from '../cartcontrol/cartcontrol.vue'
+  import split from '../split/split.vue'
+  import ratingselect from '../ratingselect/ratingselect.vue'
+
+  //  const POSITIVE = 0
+  //  const NEGATIVE = 1
+  const ALL = 2
+
   export default {
     props: {
       food: {
@@ -41,12 +58,21 @@
     },
     data() {
       return {
-        showFlag: false
+        showFlag: false,
+        selectType: ALL,
+        onlyContent: true,
+        desc: {
+          all: '全部',
+          positive: '推荐',
+          negative: '吐槽'
+        }
       }
     },
     methods: {
       show() {
          this.showFlag = true
+         this.selectType = ALL
+         this.onlyContent = true
          this.$nextTick(() => {
            if (!this.scroll) {
              this.scroll = new BScroll(this.$refs.food, {
@@ -68,7 +94,9 @@
       }
     },
     components: {
-      cartcontrol
+      cartcontrol,
+      split,
+      ratingselect
     }
   }
 </script>
@@ -114,6 +142,7 @@
 
 
     .content
+      position: relative
       padding: 18px
       .title
         line-height: 14px
@@ -143,28 +172,50 @@
           font-size: 10px
           color: rgb(147,153,159)
 
-    .cartcontrol-wrapper
-      position: absolute
-      right: 12px
-      bottom: 12px
-    .buy
-      position: absolute
-      right: 18px
-      bottom: 18px
-      z-index: 10
-      height: 24px
-      line-height: 24px
-      padding: 0 12px
-      box-sizing: border-box
-      border-radius: 12px
-      font-size: 10px
-      color: #fff
-      background: rgb(0,160,220)
-      &.fade-enter-active, &.fade-leave-active {
-        transition: all 0.2s
-        opacity: 0
-      }
-      &.fade-enter, &.fade-leave-active {
-        opacity: 0
-      }
+      .cartcontrol-wrapper
+        position: absolute
+        right: 12px
+        bottom: 12px
+      .buy
+        position: absolute
+        right: 18px
+        bottom: 18px
+        z-index: 10
+        height: 24px
+        line-height: 24px
+        padding: 0 12px
+        box-sizing: border-box
+        border-radius: 12px
+        font-size: 10px
+        color: #fff
+        background: rgb(0,160,220)
+        &.fade-enter-active, &.fade-leave-active {
+          transition: all 0.3s
+          opacity: 0
+        }
+        &.fade-enter, &.fade-leave-active {
+          opacity: 0
+        }
+    .info
+      padding: 18px
+      .title
+        line-height: 14px
+        margin-bottom: 6px
+        font-size: 14px
+        color: rgb(7,17,27)
+      .text
+        font-size: 12px
+        font-weight: 200
+        color: rgb(77,85,93)
+        line-height: 24px
+        padding: 0 8px
+    .rating
+      padding-top: 18px
+      .title
+        line-height: 14px
+        margin-left: 18px
+        font-size: 14px
+        color: rgb(7,17,27)
+
+
 </style>
