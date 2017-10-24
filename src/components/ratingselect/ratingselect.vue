@@ -48,15 +48,13 @@
           if (!event._constructed) {
             return
           }
-          this.selectType = type
-          this.$emit('increment', 'selectType', type) // 子组件通过 $emit触发父组件的方法 increment   还可以传参   this.$emit('increment' ,this.counter);
+          this.$emit('select', type)
         },
         toggleContent(event) {
           if (!event._constructed) {
             return
           }
-          this.onlyContent = !this.onlyContent
-          this.$emit('increment', 'onlyContent', this.onlyContent)
+          this.$emit('toggle')
         }
       },
       computed: {
