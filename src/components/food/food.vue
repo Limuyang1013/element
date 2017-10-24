@@ -47,7 +47,7 @@
                 </p>
               </li>
             </ul>
-            <div class="no-rating" v-show="!food.ratings || food.ratings.length===0">暂无评价</div>
+            <div class="no-rating" v-show="!food.ratings || food.ratings.length===0">暂无评</div>
           </div>
         </div>
       </div>
