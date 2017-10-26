@@ -54,7 +54,7 @@
     </transition>
   </div>
 </template>
-
+//
 <script type="text/ecmascript-6">
   import cartControl from '../cartcontrol/cartcontrol.vue'
   import BScroll from 'better-scroll'
