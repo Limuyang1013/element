@@ -92,4 +92,11 @@ export default {
             line-height 10px
             font-size 10px
             color rgb(147, 153, 149)
+          .content
+            line-height 24px
+            font-size 10px
+            color rgb(7, 17, 27)
+            .stress
+              font-size 24px
+
 </style>
