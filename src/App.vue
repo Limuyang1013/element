@@ -27,7 +27,10 @@ export default {
   data() {
     return {
       seller: {
-
+        id: (() => {
+          let queryParam = urlParse()
+          return queryParam.id
+        })()
       }
     }
   },
