@@ -50,7 +50,8 @@ import BScroll from 'better-scroll'
 import shopcart from '../shopcart/shopcart.vue'
 import cartcontrol from '../cartcontrol/cartcontrol.vue'
 import food from '../food/food.vue'
-const ERR_OK = 0
+import data from '../../common/json/data.json'
+// const ERR_OK = 0
 export default {
   props: {
     seller: {
@@ -66,17 +67,22 @@ export default {
     }
   },
   created() {
-    this.classMap = ['decrease', 'discount', 'special', 'invoice', 'guarantee']
-    this.$http.get('/api/goods').then((response) => {
-      response = response.body
-      if (response.errno === ERR_OK) {
-        this.goods = response.data
-        this.$nextTick(() => {
-          this._initScroll()
-          this._calculateHeight()
-        })
-      }
+//    this.$http.get('/api/goods').then((response) => {
+//      response = response.body
+//      if (response.errno === ERR_OK) {
+//        this.goods = response.data
+//        this.$nextTick(() => {
+//          this._initScroll()
+//          this._calculateHeight()
+//        })
+//      }
+//    })
+    this.goods = data.goods
+    this.$nextTick(() => {
+      this._initScroll()
+      this._calculateHeight()
     })
+    this.classMap = ['decrease', 'discount', 'special', 'invoice', 'guarantee']
   },
   computed: {
     currentIndex() {

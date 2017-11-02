@@ -60,9 +60,9 @@ import star from '../../components/star/star.vue'
 import split from '../split/split.vue'
 import ratingselect from '../ratingselect/ratingselect.vue'
 import {formatDate} from '../../common/js/date.js'
-
+import data from '../../common/json/data.json'
 const ALL = 2
-const ERR_OK = 0
+// const ERR_OK = 0
 
 export default {
   props: {
@@ -109,16 +109,21 @@ export default {
     }
   },
   created() {
-    this.$http.get('/api/ratings').then((response) => {
-      response = response.body
-      if (response.errno === ERR_OK) {
-        this.ratings = response.data
-        this.$nextTick(() => {
-          this.scroll = new BScroll(this.$refs.ratings, {
-            click: true
-          })
-        })
-      }
+//    this.$http.get('/api/ratings').then((response) => {
+//      response = response.body
+//      if (response.errno === ERR_OK) {
+//        this.ratings = response.data
+//        this.$nextTick(() => {
+//          this.scroll = new BScroll(this.$refs.ratings, {
+//            click: true
+//          })
+//        })
+//      }
+//    })
+    this.ratings = data.ratings
+    this.$nextTick(() => {
+      console.log(this.$el)
+      this.scroll = new BScroll(this.$el, {click: true})
     })
   },
   filters: {
