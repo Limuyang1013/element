@@ -117,6 +117,7 @@ export default {
       this.foodsScroll.scrollToElement(el, 300)
     },
     selectFood(food, event) {
+      // Better-Scroll派发的事件中event._constructed为true，原生点击事件中没有这个属性
       if (!event._constructed) {
         return
       }
