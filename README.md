@@ -2,8 +2,6 @@
 
 > vue2 element
 
-## Preview
-![](http://oasusatoz.bkt.clouddn.com/1509675343.png)
 ## Build Setup
 
 ``` bash
